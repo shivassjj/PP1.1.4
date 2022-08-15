@@ -9,7 +9,5 @@ public class Main {
         UserDao userDao = new UserDaoHibernateImpl();
 
         userDao.cleanUsersTable();
-
-
     }
 }

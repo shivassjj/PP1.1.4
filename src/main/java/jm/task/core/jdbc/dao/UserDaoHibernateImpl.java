@@ -5,10 +5,11 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
+
+    private Transaction transaction;
 
     public UserDaoHibernateImpl() {
 
@@ -16,7 +17,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-        Transaction transaction = null;
 
         String sql = "CREATE TABLE IF NOT EXISTS Users (id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
                 "name VARCHAR(30) NOT NULL, " +
@@ -37,7 +37,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-        Transaction transaction = null;
 
         String sql = "DROP TABLE IF EXISTS Users";
 
@@ -55,7 +54,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        Transaction transaction = null;
 
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -71,7 +69,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
-        Transaction transaction = null;
 
         String hql = "DELETE User WHERE id = :id";
 
@@ -98,7 +95,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
-        Transaction transaction = null;
 
         String hql = "DELETE FROM User";
 
