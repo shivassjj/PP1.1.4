@@ -96,11 +96,11 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void cleanUsersTable() {
 
-        String hql = "DELETE FROM User";
+        String hql = "TRUNCATE TABLE Users";
 
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createQuery(hql).executeUpdate();
+            session.createNativeQuery(hql).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

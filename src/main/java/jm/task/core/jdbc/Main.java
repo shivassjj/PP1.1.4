@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         UserDao userDao = new UserDaoHibernateImpl();
 
+        userDao.createUsersTable();
         userDao.cleanUsersTable();
     }
 }
